@@ -9,10 +9,18 @@ rescue Bundler::BundlerError => e
 end
 require 'test/unit'
 require 'shoulda'
+require 'fakeweb'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+ROOTTESTDIR = File.dirname(__FILE__)
+
+$LOAD_PATH.unshift(File.join(ROOTTESTDIR, '..', 'lib'))
+$LOAD_PATH.unshift(ROOTTESTDIR)
 require 'netflixer'
 
-class Test::Unit::TestCase
+FakeWeb.allow_net_connect = false
+FakeWeb.register_uri(:get, %r|^http://api\.netflix\.com/catalog/titles/movies/512381|, :body => File.open("#{ROOTTESTDIR}/title.xml"))
+FakeWeb.register_uri(:get, %r|^http://api\.netflix\.com/users/.*/title_states|, :body => File.open("#{ROOTTESTDIR}/title_states.xml"))
+
+def setup_application
+  Netflixer.application = {:name => "Whatever", :key => "jzv", :secret => "z"}
 end

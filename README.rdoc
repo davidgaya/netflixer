@@ -1,6 +1,6 @@
 = netflixer
 
-Description goes here.
+Netflixer is a wrapper to Netflix API. It is in early development, don't expect much of it.
 
 == Contributing to netflixer
  
@@ -14,6 +14,6 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2011 David Gaya. See LICENSE.txt for
+Copyright (c) 2011 Fluendo. See LICENSE.txt for
 further details.
 
